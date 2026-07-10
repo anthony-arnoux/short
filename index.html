@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShortCheck™ — Dijon Heatwave Shorts Authorization Engine</title>
+<meta name="description" content="Le short est-il autorisé à Dijon aujourd'hui ? Basé sur la vigilance canicule officielle de Météo-France. Propulsé par l'IA.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🩳</text></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="warning-banner" role="note">
+    🦺 Dans tous les cas, les <strong>doudounes sans manches</strong> sont <strong>interdites</strong> ! 🚫🧥
+  </div>
+
+  <div class="blob blob-a" aria-hidden="true"></div>
+  <div class="blob blob-b" aria-hidden="true"></div>
+  <div class="blob blob-c" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="page">
+
+    <div class="badge-row">
+      <span class="badge">✨ Propulsé par l'IA</span>
+      <span class="badge badge-live"><span class="dot-live"></span> Données en temps réel</span>
+    </div>
+
+    <h1 class="hero-title">
+      <span class="gradient-text">ShortCheck™</span>
+    </h1>
+    <p class="hero-sub">Le détecteur d'autorisation de port du short <em>nouvelle génération</em> pour Dijon 🩳⚡️</p>
+
+    <main class="card" id="card" data-state="loading">
+      <div class="card-shine" aria-hidden="true"></div>
+      <p class="eyebrow">📍 Dijon · Côte-d'Or (21) · France</p>
+
+      <h2 class="verdict" id="verdict">
+        <span class="spinner" aria-hidden="true"></span>
+        Analyse IA en cours…
+      </h2>
+      <p class="subtext" id="subtext">Interrogation de la vigilance météo France en cours de traitement neuronal.</p>
+
+      <div class="details" id="details" hidden>
+        <div class="detail-row">
+          <span class="detail-label">🌡️ Vigilance canicule — aujourd'hui</span>
+          <span class="pill" id="pill-today">—</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">🔮 Vigilance canicule — demain</span>
+          <span class="pill" id="pill-tomorrow">—</span>
+        </div>
+      </div>
+
+      <button class="refresh-btn" id="refresh-btn" type="button">
+        <span class="refresh-icon">↻</span> Relancer l'analyse
+      </button>
+
+      <p class="meta" id="meta"></p>
+    </main>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-num">99.9<span>%</span></div>
+        <div class="stat-label">Précision estimée*</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">1<span>/j</span></div>
+        <div class="stat-label">Analyses officielles</div>
+      </div>
+    </div>
+
+    <section class="rule-card">
+      <h3>⚙️ Comment ça marche</h3>
+      <p>
+        Notre algorithme propriétaire™ interroge les données de
+        <strong>vigilance météorologique Météo-France</strong> (rediffusées via le hub
+        Opendatasoft) et applique une règle simple mais <em>rigoureusement non négociable</em> :
+        le short n'est <strong>officiellement autorisé</strong> que lorsque Dijon
+        est placée en <strong>vigilance canicule rouge</strong> 🔴.
+      </p>
+      <p class="disclaimer">*Précision garantie uniquement si Météo-France a raison. Aucune once d'intelligence artificielle n'a réellement été utilisée dans la fabrication de ce site.</p>
+    </section>
+
+    <footer class="footer">
+      <p>
+        Donnée d'origine : <a href="https://www.data.gouv.fr/dataservices/api-bulletin-vigilance" target="_blank" rel="noopener noreferrer">Vigilance météo — Météo-France (data.gouv.fr)</a><br>
+        Requête en direct via : <a href="https://public.opendatasoft.com/explore/dataset/weatherref-france-vigilance-meteo-departement/" target="_blank" rel="noopener noreferrer">Opendatasoft (miroir public, sans clé API)</a>
+      </p>
+      <p class="footer-tiny">Fait avec 🩳, ☀️ et beaucoup trop de dégradés violets.</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
