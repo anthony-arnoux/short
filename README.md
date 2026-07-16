@@ -1,3 +1,5 @@
+déploiement auto à partir de ce dépot
+
 # ShortCheck™ 🩳
 
 Un site à page unique, 100 % client (HTML/CSS/JS, aucun serveur, aucune
