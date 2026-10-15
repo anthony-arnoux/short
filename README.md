@@ -17,7 +17,7 @@ est placée en **vigilance canicule rouge** par Météo-France. En dessous de ç
 
 - **Donnée d'origine** : [Vigilance météo — Météo-France](https://www.data.gouv.fr/dataservices/api-bulletin-vigilance) (catalogué sur data.gouv.fr). L'API officielle nécessite une clé et n'est pas appelable directement depuis un site 100 % statique.
 - **Requête réellement effectuée** : le navigateur interroge en direct le miroir public du jeu de données sur [Opendatasoft](https://public.opendatasoft.com/explore/dataset/weatherref-france-vigilance-meteo-departement/) — gratuit, sans clé, CORS ouvert (`access-control-allow-origin: *`).
-- Filtré sur `domain_id=21` (Côte-d'Or) et `phenomenon=canicule`, pour les échéances J (aujourd'hui) et J+1 (demain).
+- Filtré sur `domain_id=21` (Côte-d'Or), pour les échéances J (aujourd'hui) et J+1 (demain). Le phénomène `canicule` n'étant publié par Météo-France qu'en saison estivale, son absence dans le bulletin du jour est interprétée comme une vigilance verte.
 
 Voir [app.js](app.js) pour l'appel réseau (`API_URL`).
 

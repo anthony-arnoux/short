@@ -3,7 +3,7 @@
 
   const API_URL =
     "https://public.opendatasoft.com/api/records/1.0/search/?dataset=weatherref-france-vigilance-meteo-departement" +
-    "&q=domain_id%3A21+AND+phenomenon%3Acanicule&rows=10";
+    "&refine.domain_id=21&rows=50";
 
   const CACHE_KEY = "short-dijon-vigilance-v1";
   const CACHE_MAX_AGE_MS = 15 * 60 * 1000;
@@ -91,26 +91,26 @@
 
   function parseRecords(json) {
     const records = (json.records || []).map((r) => r.fields || {});
-    const byEcheance = (echeance) =>
-      records.find((f) => f.echeance === echeance);
 
-    const j = byEcheance("J");
-    const j1 = byEcheance("J1");
-
-    if (!j) return null;
-
-    return {
-      today: {
-        color: j.color || "inconnu",
-        productDatetime: j.product_datetime ? new Date(j.product_datetime) : null,
-      },
-      tomorrow: j1
-        ? {
-            color: j1.color || "inconnu",
-            productDatetime: j1.product_datetime ? new Date(j1.product_datetime) : null,
-          }
-        : null,
+    // Météo-France only publishes the "canicule" phenomenon during the
+    // summer season. Outside of it, the bulletin for Côte-d'Or still exists
+    // (other phenomena) but has no canicule record — which means no heatwave
+    // alert, i.e. the same as "vert".
+    const forEcheance = (echeance) => {
+      const bulletin = records.filter((f) => f.echeance === echeance);
+      if (!bulletin.length) return null;
+      const canicule = bulletin.find((f) => f.phenomenon === "canicule");
+      const source = canicule || bulletin[0];
+      return {
+        color: canicule ? canicule.color || "inconnu" : "vert",
+        productDatetime: source.product_datetime ? new Date(source.product_datetime) : null,
+      };
     };
+
+    const today = forEcheance("J");
+    if (!today) return null;
+
+    return { today, tomorrow: forEcheance("J1") };
   }
 
   function readCache() {

@@ -34,8 +34,13 @@ this as the `static-server` preview config.)
     `data.gouv.fr` vs. `Opendatasoft` distinction accurate in any UI copy —
     data.gouv.fr is the catalog/origin, Opendatasoft is what's actually
     queried over the network.
-  - Query filters on `domain_id=21` (Côte-d'Or) and `phenomenon=canicule`,
-    pulling both `echeance=J` (today) and `J1` (tomorrow) records.
+  - Query filters on `domain_id=21` (Côte-d'Or) only (`refine.domain_id`,
+    exact match), pulling all phenomena for `echeance=J` (today) and `J1`
+    (tomorrow); `parseRecords()` then picks the `canicule` record. Météo-France
+    only publishes `canicule` during the summer season — when the bulletin
+    exists but has no canicule record, it's treated as `vert`. Don't filter
+    on `phenomenon=canicule` server-side: off-season that returns 0 records
+    and the site falls into its error state.
   - `COLOR_MESSAGE` maps each vigilance color (rouge/orange/jaune/vert) to a
     distinct French one-liner shown as the subtext — these are intentionally
     written, not generated from a template; edit them directly rather than
